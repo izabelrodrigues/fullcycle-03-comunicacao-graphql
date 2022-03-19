@@ -1,0 +1,66 @@
+"""
+Schema Types
+"""
+
+type Category {
+    id: ID!
+    name: String!
+    description: String!
+    courses: [Course!]!
+}
+
+type Course {
+    id: ID!
+    name: String!
+    description: String!
+    category: Category!
+    chapters: [Chapter!]
+}
+
+type Chapter {
+    id: ID!
+    name: String!
+    course: Course!
+    category: Category!
+
+}
+
+"""
+Inputs
+"""
+
+input NewCategory {
+    name: String!
+    description: String!
+}
+
+input NewCourse {
+    name: String!
+    description: String!
+    categoryId: ID!
+}
+
+input NewChapter {
+    name:String!
+    courseId: ID!
+}
+
+"""
+Queries
+"""
+
+type Query {
+    categories: [Category]
+    courses: [Course]
+    chapters: [Chapter]
+}
+
+"""
+Mutations
+"""
+
+type Mutation {
+    createCategory(input: NewCategory): Category!
+    createCourse(input: NewCourse): Course!
+    createChapter(input: NewChapter): Chapter!
+}
